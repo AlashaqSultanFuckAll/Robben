@@ -39,4 +39,4 @@ if (message.content.startsWith(admin + 'setavatar')) {
 }
 });
 
-client.login(BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
