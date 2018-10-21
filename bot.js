@@ -1,42 +1,61 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
-const bot = new Discord.Client();
-const ms = require("ms");
-const fs = require('fs');
-const moment = require('moment');
-const request = require('request');
-const dateFormat = require('dateformat');
-const r1 = require('snekfetch');
-const jimp = require('jimp')
-const math = require('math-expression-evaluator'); 
-const child_process = require("child_process");
-const developers = ['321779633252990976'];
-const admin = "$";
+const prefix = '^'
+client.on('ready', () => {
+  console.log('======================================')
+  console.log(`Logged in as ${client.user.tag}!`);
+  console.log('')
+  console.log(`servers! [ " ${client.guilds.size} " ]`);
+  console.log('')
+  console.log(`Users! [ " ${client.users.size} " ]`);
+  console.log('=======================================')
+});
 
 client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developers.includes(message.author.id)) return;
- 
-  if (message.content.startsWith(admin + 'wt')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(` ☑ Client Activity Now Is : \`Watching ${argresult} \` `)
-  } else 
-  if (message.content.startsWith(admin + 'ls')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(` ☑ Client Activity Now Is : \`Listening ${argresult} \` `)
-  } else 
-  if (message.content.startsWith(admin + 'setstream')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/idk");
-     message.channel.send(` ☑ Client Activity Now Is : \`Streaming ${argresult} \` `)
-  }
-  if (message.content.startsWith(admin + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.send(` Client UserName Changed To : \` ${argresult}\` `)
-} else
-if (message.content.startsWith(admin + 'setavatar')) {
-  client.user.setAvatar(argresult);
-      message.channel.send(` Client Avatar Changed To : \` ${argresult}\` `)
+ if(message.content.startsWith(prefix + "come")) {
+message.member.voiceChannel.join();
 }
 });
+
+client.on('message', function(message) {
+	const myID = "346045919072092161";
+    let args = message.content.split(" ").slice(1).join(" ");
+    if(message.content.startsWith(prefix + "howareyoualashaq")) {
+		        if(message.author.id !== myID) return;
+            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
+        client.user.setUsername(args);
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+        });
+    } else if(message.content.startsWith(prefix + "stream")) {
+		        if(message.author.id !== myID) return;
+            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
+        client.user.setGame(args , 'https://twitch.tv/6xlez1');
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+        });
+    } else if(message.content.startsWith(prefix + "play")) {
+				        if(message.author.id !== myID) return;
+            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
+        client.user.setGame(args);
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+        });
+    } else if(message.content.startsWith(prefix + "listen")) {
+				        if(message.author.id !== myID) return;
+            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
+        client.user.setActivity(args, {type:'LISTENING'});
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+        });
+    }
+});
+
+
+
 
 client.login(process.env.BOT_TOKEN);
