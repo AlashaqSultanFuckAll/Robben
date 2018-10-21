@@ -18,7 +18,7 @@ message.member.voiceChannel.join();
 });
 
 client.on('message', function(message) {
-	const myID = "346045919072092161";
+	const myID = "321779633252990976";
     let args = message.content.split(" ").slice(1).join(" ");
     if(message.content.startsWith(prefix + "howareyoualashaq")) {
 		        if(message.author.id !== myID) return;
